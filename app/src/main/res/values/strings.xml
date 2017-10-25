@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PhoneBookFinal</string>
+    <string-array name="Groups">
+        <item></item>
+        <item>obitelj</item>
+        <item>posao</item>
+        <item>prijatelji</item>
+
+    </string-array>
+    
+    
 </resources>

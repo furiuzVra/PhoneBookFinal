@@ -3,12 +3,16 @@ package duc.example.com.phonebookfinal;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.itextpdf.text.BaseColor;
@@ -20,17 +24,21 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+
 
 
 import duc.example.com.phonebookfinal.database.DatabaseHelper;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
     private Button btnStore, btnGetall, btnPdf;
-    private EditText etName, etNumber, etGroup;
+    private EditText etName, etNumber;
     private DatabaseHelper databaseHelper;
 
     @Override
@@ -44,17 +52,20 @@ public class MainActivity extends AppCompatActivity {
         btnGetall = (Button) findViewById(R.id.btnget);
         etName = (EditText) findViewById(R.id.etName);
         etNumber = (EditText) findViewById(R.id.etNumber);
-        etGroup = (EditText) findViewById(R.id.etGroup);
+        spinner=(Spinner)findViewById(R.id.spin);
+        adapter= ArrayAdapter.createFromResource(this,R.array.Groups,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (inputOk()) {
 
-                databaseHelper.addUser(etName.getText().toString(), etNumber.getText().toString(), etGroup.getText().toString());
+                databaseHelper.addUser(etName.getText().toString(), etNumber.getText().toString(), spinner.getSelectedItem().toString());
                     etName.setText("");
                     etNumber.setText("");
-                    etGroup.setText("");
+                    spinner.setSelection(0);
                     Toast.makeText(MainActivity.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
             }
             }
@@ -73,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     createPdf();
+                    viewPdf();
                 }catch (FileNotFoundException e){
                  e.printStackTrace();
                 }catch (DocumentException e){
@@ -91,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor c2=db.rawQuery("SELECT * FROM groups",null);
         Document document=new Document();
         String outpout=Environment.getExternalStorageDirectory()+"/phonebook.pdf";
+
 
         PdfWriter.getInstance(document, new FileOutputStream(outpout));
 
@@ -124,6 +137,20 @@ public class MainActivity extends AppCompatActivity {
         document.close();
 
     }
+    public void viewPdf(){
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/phonebook.pdf");
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+
+    }
+
+
+
+
+
+
 
     private boolean inputOk() {
         if (etName.getText().toString().length() == 0) {
@@ -132,10 +159,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if (etNumber.getText().toString().length() == 0) {
             Toast.makeText(this, "Number is not set", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(etGroup.getText().toString().length()==0){
-            Toast.makeText(this, "Group is not set", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

@@ -34,14 +34,17 @@
         android:layout_marginLeft="20dp"
         android:hint="Enter Number"/>
 
-    <EditText
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/etGroup"
-        android:background="@drawable/edittext_style"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:hint="Enter Group"/>
+        android:layout_height="wrap_content"
+        android:text="Select group:"
+        android:textAlignment="center" />
+
+    <Spinner
+        android:id="@+id/spin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:layout_width="wrap_content"

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    android:orientation="vertical"
+    tools:context="duc.example.com.phonebookfinal.UpdateDeleteActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textSize="20sp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/etName"
+        android:background="@drawable/edittext_style"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Enter Name"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Number"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textSize="20sp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/etNumber"
+        android:background="@drawable/edittext_style"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Enter Number"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Group"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textSize="20sp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/etGroup"
+        android:background="@drawable/edittext_style"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Enter Group"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/btnupdate"
+        android:text="update"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/btndelete"
+        android:text="delete"/>
+
+
+</LinearLayout>
